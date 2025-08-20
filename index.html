@@ -1,11 +1,142 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Welcome to luckymilcky.org</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>luckymilcky — Coming Soon</title>
+  <meta name="description" content="luckymilcky.org — Coming Soon." />
+  <meta name="color-scheme" content="light dark" />
+  <!-- 预上线阶段不想被收录可保留；上线后可删除 -->
+  <meta name="robots" content="noindex,nofollow" />
+  <meta name="theme-color" content="#0d0d0f" />
+  <style>
+    /* ====== Base ====== */
+    :root{
+      --bg: #0d0d10;
+      --fg: #e9eaec;
+      --muted: #a6abb3;
+      --accent: #c7a86e; /* 香槟金 */
+      --ring: rgba(199,168,110,.35);
+      --card: rgba(255,255,255,.04);
+    }
+    @media (prefers-color-scheme: light){
+      :root{
+        --bg:#f6f7f9; --fg:#0e1116; --muted:#5b626e;
+        --card: rgba(0,0,0,.035);
+        --ring: rgba(199,168,110,.25);
+      }
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                   Roboto, "Helvetica Neue", Arial, "Apple Color Emoji",
+                   "Segoe UI Emoji", "Segoe UI Symbol";
+      color:var(--fg);
+      background:
+        radial-gradient(1200px 800px at 70% 10%, rgba(199,168,110,.08), transparent 60%),
+        radial-gradient(1000px 600px at 20% 90%, rgba(199,168,110,.06), transparent 55%),
+        linear-gradient(180deg, var(--bg), var(--bg));
+      display:grid; place-items:center;
+      letter-spacing:.02em;
+      -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+    }
+
+    /* ====== Card ====== */
+    .wrap{
+      width:min(92vw, 780px);
+      padding:48px 40px;
+      border-radius:24px;
+      background:var(--card);
+      backdrop-filter:saturate(1.2) blur(6px);
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:
+        0 10px 30px rgba(0,0,0,.16),
+        inset 0 0 0 1px rgba(255,255,255,.04);
+      animation:fadeUp .8s cubic-bezier(.22,.61,.36,1) both;
+    }
+    @keyframes fadeUp{
+      from{opacity:0; transform:translateY(8px)}
+      to{opacity:1; transform:translateY(0)}
+    }
+
+    .brand{
+      font-size:14px; text-transform:uppercase;
+      letter-spacing:.18em; color:var(--muted);
+      margin-bottom:22px; display:flex; align-items:center; gap:.6rem;
+    }
+    .dot{
+      width:8px; height:8px; border-radius:50%;
+      background: radial-gradient(100% 100% at 30% 30%, #fff, var(--accent));
+      box-shadow: 0 0 0 6px var(--ring), 0 0 18px rgba(199,168,110,.35);
+    }
+
+    h1{
+      margin:0 0 12px;
+      font-weight:700;
+      font-size: clamp(42px, 7vw, 72px);
+      line-height:1.02;
+      letter-spacing:.01em;
+      background: linear-gradient(180deg, #fff, #ddd 55%, #b9b9b9);
+      color:transparent; -webkit-background-clip:text; background-clip:text;
+    }
+    @media (prefers-color-scheme: dark){
+      h1{ background: linear-gradient(180deg, #f7f7f7, #dcdcdc 55%, #bfbfbf);
+          -webkit-background-clip:text; background-clip:text; }
+    }
+
+    .sub{
+      color:var(--muted);
+      font-size: clamp(14px, 2.6vw, 18px);
+      margin:0 0 26px;
+    }
+
+    .divider{
+      height:1px; width:100%;
+      background:linear-gradient(90deg, transparent, rgba(199,168,110,.55), transparent);
+      border-radius:999px; opacity:.7; margin:26px 0 12px;
+    }
+
+    .foot{
+      display:flex; justify-content:space-between; align-items:center;
+      gap:1rem; color:var(--muted); font-size:13px;
+    }
+    .pill{
+      padding:8px 14px; border-radius:999px;
+      border:1px solid rgba(199,168,110,.35);
+      background:linear-gradient(180deg, rgba(199,168,110,.14), rgba(199,168,110,.08));
+      text-decoration:none; color:var(--fg);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+      transition: transform .15s ease, box-shadow .2s ease;
+    }
+    .pill:focus-visible{ outline:2px solid var(--accent); outline-offset:2px }
+    .pill:hover{ transform:translateY(-1px);
+      box-shadow:0 6px 16px rgba(199,168,110,.18) }
+
+    /* 小屏优化 */
+    @media (max-width:480px){
+      .wrap{padding:36px 24px; border-radius:20px}
+      .foot{flex-direction:column; align-items:flex-start}
+    }
+  </style>
 </head>
 <body>
-  <h1>Hello, World!</h1>
-  <p>This is my first website on GitHub Pages 🎉</p>
+  <main class="wrap" role="main" aria-label="Coming soon">
+    <div class="brand"><span class="dot" aria-hidden="true"></span> luckymilcky.org</div>
+    <h1>Coming&nbsp;Soon</h1>
+    <p class="sub">We’re crafting something delightful. Please check back shortly.</p>
+    <div class="divider" aria-hidden="true"></div>
+    <div class="foot">
+      <span>© <span id="y"></span> luckymilcky</span>
+
+      <a class="pill" href="mailto:hello@luckymilcky.org">Contact</a>
+    </div>
+  </main>
+
+  <script>
+    // 动态年份
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
